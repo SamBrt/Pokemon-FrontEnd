@@ -1,0 +1,41 @@
+/* Navbar */
+.navbar {
+    width: 100%;
+    background-color: white; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombra applicata */
+    border-radius: 5px;
+  }
+  
+  /* Stile per il logo */
+  .navbar-logo {
+    width: 120px;
+    height: auto;
+    margin-left: 20px;
+  }
+  
+  /* Contenitore dei link a destra */
+  .navbar .ml-auto {
+    display: flex;
+    margin-right: 15px;
+    gap: 15px; 
+  }
+  
+  /* Stile dei link nella navbar */
+  .nav-link {
+    font-size: 16px;
+    font-weight: bold;
+    color: #28a745;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  /* Hover effect per i link */
+  .nav-link:hover {
+    color: #218838; 
+  }
+
+
+  

@@ -1,0 +1,30 @@
+/* Impedisci la selezione del testo e rimuovi il focus sugli elementi */
+h1, h2, h3, p, a, .pokemon-card, .nav-link {
+    user-select: none; /* Impedisce la selezione del testo */
+    outline: none; /* Rimuove il bordo di focus */
+    cursor: default; /* Imposta il cursore predefinito */
+  }
+  
+  /* Rimuove i focus dalla card al clic */
+  .pokemon-card {
+    pointer-events: none;
+  }
+  
+  /* Se vuoi applicare la regola globalmente, puoi usar il body */
+  body {
+    background-image: url('assets/5250528.jpg');/* Cambia con il nome dell'immagine */
+    background-repeat: no-repeat;
+    background-size: cover; /* Copre tutto lo schermo */
+    background-position: center center; /* Centra l'immagine */
+    background-attachment: fixed; /* Sfondo fisso anche durante lo scrolling */
+    background-color: #f0f0f5; /* Colore di backup nel caso l'immagine non venga caricata */
+  }
+  
+  .container {
+    background-color: rgba(255, 255, 255, 0.8); /* Sfondo semi-trasparente per evidenziare i contenuti */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Aggiungi ombra per risalto */
+  }
+
+  

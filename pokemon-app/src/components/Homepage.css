@@ -1,0 +1,71 @@
+
+  
+  /* Contenitore del filtro */
+  .filter-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    gap: 20px;
+  }
+  
+  /* Select per il filtro */
+ /* Filtro stile */
+.form-select {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #28a745;
+  border-radius: 5px;
+  background-color: white;
+  color: #333;
+  font-size: 16px;
+}
+
+.form-select:focus {
+  border-color: #28a745;
+  outline: none;
+  box-shadow: 0 0 5px rgba(46, 204, 113, 0.4);
+}
+
+  
+  /* Stile delle card dei Pokémon */
+  .pokemon-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .pokemon-card {
+    background-color: #fff;
+    padding: 20px;
+    width: 250px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+  }
+  
+  .pokemon-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .pokemon-image {
+    width: 150px;
+    height: auto;
+    margin-bottom: 15px;
+    border-radius: 8px;
+  }
+  
+  .pokemon-card h2 {
+    font-size: 20px;
+    color: #28a745;
+  }
+  
+  .pokemon-card p {
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0;
+  }
+  
