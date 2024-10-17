@@ -26,7 +26,7 @@ const Login = () => {
   
     console.log("Dati del form inviati:", {
       email: formData.email,
-      password: formData.password,
+      password: '*****',
     });
   
     try {

@@ -5,6 +5,7 @@ import './Navbar.css';
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Stato per il menu a comparsa
   const navigate = useNavigate();
 
   // Controlla se l'utente è già loggato (esistenza di dati in sessionStorage)
@@ -14,6 +15,11 @@ const Navbar = () => {
       setIsLoggedIn(true); // L'utente è già loggato
     }
   }, []);
+
+  // Funzione per gestire l'apertura/chiusura del menu
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   // Gestione del clic su "Registrati"
   const handleRegisterClick = (e) => {
@@ -75,22 +81,22 @@ const Navbar = () => {
           className="navbar-logo"
         />
       </Link>
-      <div className="ml-auto">
+      <div className={`menu ${isMenuOpen ? 'open' : ''}`}>
         <Link to="/" className="nav-link">
           Home
         </Link>
-        {/* Gestione del click su Registrati */}
         <Link to="/register" className="nav-link" onClick={handleRegisterClick}>
           Registrati
         </Link>
-        {/* Gestione del click su Login */}
         <Link to="/login" className="nav-link" onClick={handleLoginClick}>
           Login
         </Link>
-        {/* Aggiungi Dashboard visibile solo se loggato */}
         <Link to="/dashboard" className="nav-link" onClick={handleDashboardClick}>
           Dashboard
         </Link>
+      </div>
+      <div className="hamburger" onClick={toggleMenu}>
+        &#9776;
       </div>
     </nav>
   );

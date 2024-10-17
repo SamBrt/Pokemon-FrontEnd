@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import './Homepage.css'; // CSS per la homepage
 import Navbar from './Navbar'; // Importa il componente Navbar
+import Footer from './Footer'; // Importa il componente Footer
 import '/src/App.css'
 
 const Homepage = () => {
@@ -175,6 +176,8 @@ const Homepage = () => {
           )}
         </div>
       )}
+
+      <Footer /> {/* Aggiungi il footer */}
     </div>
   );
 };

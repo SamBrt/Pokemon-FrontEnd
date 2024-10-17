@@ -1,12 +1,13 @@
 /* Navbar */
 .navbar {
-    width: 100%;
+    
     background-color: white; 
     display: flex;
     align-items: center;
     justify-content: space-between;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombra applicata */
     border-radius: 5px;
+    padding: 10px 20px;
   }
   
   /* Stile per il logo */
@@ -35,7 +36,58 @@
   /* Hover effect per i link */
   .nav-link:hover {
     color: #218838; 
+    cursor: pointer;
   }
 
+  /* Hamburger menu (inizialmente nascosto) */
+  .hamburger {
+    display: none;
+    font-size: 30px;
+    color: #28a745;
+    cursor: pointer;
+  }
 
-  
+  /* Menu nascosto per dispositivi mobili */
+  .menu {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+  }
+
+  /* Media query per tablet in giù */
+  @media (max-width: 768px) {
+    .ml-auto {
+      display: none; /* Nascondi i link normali su dispositivi piccoli */
+    }
+    
+    .hamburger {
+      display: block; /* Mostra l'hamburger menu */
+    }
+
+    .menu {
+      display: none; /* Nascondi il menu a comparsa all'inizio */
+      flex-direction: column;
+      position: absolute;
+      top: 50px;
+      right: 0;
+      background-color: white;
+      border: 1px solid #28a745;
+      width: 200px;
+      border-radius: 5px;
+      gap: 0;
+    }
+
+    .menu.open {
+      display: flex; /* Mostra il menu quando si clicca l'hamburger */
+    }
+
+    .nav-link {
+      padding: 10px;
+      border-bottom: 1px solid #28a745;
+      font-size: 18px; /* Link più grandi per i dispositivi mobili */
+    }
+
+    .nav-link:last-child {
+      border-bottom: none; /* Nessun bordo inferiore per l'ultimo link */
+    }
+  }

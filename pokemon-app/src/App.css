@@ -27,4 +27,20 @@ h1, h2, h3, p, a, .pokemon-card, .nav-link {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Aggiungi ombra per risalto */
   }
 
+  /* Stile per gli input normali */
+input {
+  border: 2px solid #000; /* Bordo nero predefinito */
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+/* Stile per gli input in focus */
+input:focus {
+  outline: none; /* Rimuovi il bordo predefinito di focus */
+  border-color: #28a745; /* Colore verde per il focus */
+  box-shadow: 0 0 5px rgba(40, 167, 69, 0.5); /* Aggiungi un'ombra verde leggera */
+}
+
+
   

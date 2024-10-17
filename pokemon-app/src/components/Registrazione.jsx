@@ -48,118 +48,124 @@ const Registrazione = () => {
     passwordValidations.hasNumber &&
     passwordValidations.hasMinLength;
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-    
-      // Reset degli errori
-      setErrors({
-        passwordMismatch: false,
-        termsNotAccepted: false,
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Reset degli errori
+    setErrors({
+      passwordMismatch: false,
+      termsNotAccepted: false,
+    });
+
+    // Controlla se le password corrispondono
+    if (formData.password !== formData.confirmPassword) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        passwordMismatch: true,
+      }));
+      Swal.fire({
+        icon: "error",
+        title: "Errore!",
+        text: "Le password non corrispondono!",
+        confirmButtonText: "OK",
+        customClass: {
+          confirmButton: "btn-success-swal",
+        },
       });
-    
-      // Controlla se le password corrispondono
-      if (formData.password !== formData.confirmPassword) {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          passwordMismatch: true,
-        }));
+      return;
+    }
+
+    // Controlla se i termini sono accettati
+    if (!formData.termsAccepted) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        termsNotAccepted: true,
+      }));
+      Swal.fire({
+        icon: "error",
+        title: "Errore!",
+        text: "Devi accettare i termini e le condizioni!",
+        confirmButtonText: "OK",
+        customClass: {
+          confirmButton: "btn-success-swal",
+        },
+      });
+      return;
+    }
+
+    // Verifica che la password soddisfi tutti i requisiti
+    if (!isPasswordValid) {
+      Swal.fire({
+        icon: "error",
+        title: "Errore!",
+        text: "La password non soddisfa i requisiti richiesti.",
+        confirmButtonText: "OK",
+        customClass: {
+          confirmButton: "btn-success-swal",
+        },
+      });
+      return;
+    }
+
+    // Prende la data e l'ora attuale
+    const date = new Date("2024-10-14T14:35:00"); // Esempio di data con orario
+const formattedDate = date.toLocaleDateString("it-IT"); // "it-IT" per il formato italiano
+
+
+
+    try {
+      // Invia i dati al server (password non hashata)
+      const response = await fetch("http://localhost:3000/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: formData.username,
+          email: formData.email,
+          password: formData.password, // Invia la password non hashata al server
+          registrationDate: formattedDate, // Aggiungi la data di registrazione
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.status === 201) {
         Swal.fire({
-          icon: "error",
-          title: "Errore!",
-          text: "Le password non corrispondono!",
+          icon: "success",
+          title: "Registrazione completata!",
+          text: data.message,
           confirmButtonText: "OK",
           customClass: {
             confirmButton: "btn-success-swal",
           },
+        }).then(() => {
+          navigate("/login");
         });
-        return;
-      }
-    
-      // Controlla se i termini sono accettati
-      if (!formData.termsAccepted) {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          termsNotAccepted: true,
-        }));
+      } else {
         Swal.fire({
           icon: "error",
           title: "Errore!",
-          text: "Devi accettare i termini e le condizioni!",
-          confirmButtonText: "OK",
-          customClass: {
-            confirmButton: "btn-success-swal",
-          },
-        });
-        return;
-      }
-    
-      // Verifica che la password soddisfi tutti i requisiti
-      if (!isPasswordValid) {
-        Swal.fire({
-          icon: "error",
-          title: "Errore!",
-          text: "La password non soddisfa i requisiti richiesti.",
-          confirmButtonText: "OK",
-          customClass: {
-            confirmButton: "btn-success-swal",
-          },
-        });
-        return;
-      }
-    
-      try {
-        // Invia i dati al server (password non hashata)
-        const response = await fetch("http://localhost:3000/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username: formData.username,
-            email: formData.email,
-            password: formData.password, // Invia la password non hashata al server
-          }),
-        });
-    
-        const data = await response.json();
-    
-        if (response.status === 201) {
-          Swal.fire({
-            icon: "success",
-            title: "Registrazione completata!",
-            text: data.message,
-            confirmButtonText: "OK",
-            customClass: {
-              confirmButton: "btn-success-swal",
-            },
-          }).then(() => {
-            navigate("/login");
-          });
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Errore!",
-            text: data.message,
-            confirmButtonText: "OK",
-            customClass: {
-              confirmButton: "btn-success-swal",
-            },
-          });
-        }
-      } catch (error) {
-        console.error("Errore durante la registrazione:", error);
-        Swal.fire({
-          icon: "error",
-          title: "Errore!",
-          text: "Si è verificato un errore durante la registrazione",
+          text: data.message,
           confirmButtonText: "OK",
           customClass: {
             confirmButton: "btn-success-swal",
           },
         });
       }
-    };
-    
+    } catch (error) {
+      console.error("Errore durante la registrazione:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Errore!",
+        text: "Si è verificato un errore durante la registrazione",
+        confirmButtonText: "OK",
+        customClass: {
+          confirmButton: "btn-success-swal",
+        },
+      });
+    }
+  };
 
   return (
     <>
@@ -279,7 +285,7 @@ const Registrazione = () => {
             </button>
 
             <div className="text-center mt-4">
-              <p>Sei già registrato? <a href="/login">Accedi</a></p>
+              <p>Sei già registrato? <a className="text-green" href="/login">Accedi</a></p>
             </div>
           </form>
         </div>
